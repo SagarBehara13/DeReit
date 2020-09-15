@@ -7,6 +7,7 @@
     "test": "test"
   },
   "scripts": {
+    "start": "node --require ts-node/register index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +22,17 @@
   "homepage": "https://github.com/SagarBehara13/chainlink-hackathon#readme",
   "dependencies": {
     "@openzeppelin/contracts": "^3.1.0",
-    "openzeppelin-solidity": "^3.1.0"
+    "@types/node": "^14.10.2",
+    "bluebird": "^3.7.2",
+    "body-parser": "^1.19.0",
+    "debug": "^4.1.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "logger": "^0.0.1",
+    "mongoose": "^5.10.5",
+    "openzeppelin-solidity": "^3.1.0",
+    "time-stamp": "^2.2.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
   }
 }
