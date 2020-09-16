@@ -8,6 +8,6 @@ router.post('/marketData', asyncJsonController(req => marketData.addData(req.bod
 router.delete('/marketData', asyncJsonController(req => marketData.deleteData(req.body)))
 router.put('/marketData', asyncJsonController(req => marketData.editData(req.body)))
 router.post('/search/marketData', asyncJsonController(req => marketData.getData(req.body)))
-router.get('/marketData', asyncJsonController(req => marketData.getData()))
+router.get('/marketData', asyncJsonController(req => marketData.getEntireProperty()))
 
 export default router
