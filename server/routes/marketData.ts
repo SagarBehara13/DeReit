@@ -7,7 +7,7 @@ const router = Router()
 router.post('/marketData', asyncJsonController(req => marketData.addData(req.body)))
 router.delete('/marketData', asyncJsonController(req => marketData.deleteData(req.body)))
 router.put('/marketData', asyncJsonController(req => marketData.editData(req.body)))
-router.post('/search/marketData', asyncJsonController(req => marketData.getData(req.body)))
+router.post('/search/marketData', asyncJsonController(req => marketData.getData(req.query)))
 router.get('/marketData', asyncJsonController(req => marketData.getEntireProperty()))
 
 export default router
