@@ -52,14 +52,15 @@ export const deleteData = async (data) => {
 }
 
 export const getData = async (data) => {
-  const marketData = await MarketData.find({
-    $or: [
-      { name: { $regex: data.name, $options: "i" }},
-      { location: { $regex: data.location, $options: "i" }}
-    ]
-  })
+  try{
+    const marketData = await MarketData.find({
+      name: { $regex: data.name, $options: "i" }
+    })
 
-  return marketData
+    return marketData || []
+  } catch(e){
+    console.log(e)
+  }
 }
 
 export const getEntireProperty = async () => {
