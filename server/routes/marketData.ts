@@ -1,12 +1,13 @@
 import { Router } from 'express'
 import * as marketData from '../controller/marketData'
+import asyncJsonController from '../utils/asyncJsonController'
 
 const router = Router()
 
-router.post('/marketData', async (req, res) => marketData.addData(req.body, res))
-router.delete('/marketData', async (req, res) => marketData.deleteData(req.body, res))
-router.put('/marketData', async (req, res) => marketData.editData(req.body, res))
-router.post('/marketData', async (req, res) => marketData.getData(req.body, res))
-router.get('/marketData', async (req, res) => marketData.getEntireProperty(res))
+router.post('/marketData', asyncJsonController(req => marketData.addData(req.body)))
+router.delete('/marketData', asyncJsonController(req => marketData.deleteData(req.body)))
+router.put('/marketData', asyncJsonController(req => marketData.editData(req.body)))
+router.post('/search/marketData', asyncJsonController(req => marketData.getData(req.body)))
+router.get('/marketData', asyncJsonController(req => marketData.getData()))
 
 export default router
