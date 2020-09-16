@@ -1,6 +1,6 @@
 import MarketData from '../database/models/marketData'
 
-export const addData = async (data) => {
+export const addData = async (data, res) => {
   const newRealEstate = new MarketData({
     name: data.name,
     location: data.location,
@@ -16,10 +16,10 @@ export const addData = async (data) => {
   })
 
   await newRealEstate.save()
-  return { sucess: true }
+  res.send({ sucess: true })
 }
 
-export const editData = async (data) => {
+export const editData = async (data, res) => {
   const marketData = await MarketData.findOne({ name: data.name, owner: data.owner })
   if(marketData){
     marketData.set('name', data.name)
@@ -35,31 +35,35 @@ export const editData = async (data) => {
     marketData.set('contact', data.contact)
 
     await marketData.save()
-    return { sucess: true }
+    res.send({ sucess: true })
   }
-  return { error: "Property Not Found" }
+
+  res.send({ error: "Property Not Found" })
 }
 
-export const deleteData = async (data) => {
+export const deleteData = async (data, res) => {
   const marketData = await MarketData.findOne({ name: data.name, owner: data.owner })
   if(marketData){
     await MarketData.deleteOne({ _id: marketData })
-    return { sucess: true }
+    res.send({ sucess: true })
   }
-  return { error: "Property Not Found" }
+
+  res.send({ error: "Property Not Found" })
 }
 
-export const getData = async (data) => {
+export const getData = async (data, res) => {
   const marketData = await MarketData.find({
     $or: [
       { name: { $regex: data.name, $options: "i" }},
       { location: { $regex: data.location, $options: "i" }}
     ]
   })
-  return marketData
+  
+  res.send(marketData)
 }
 
-export const getEntireProperty = async () => {
+export const getEntireProperty = async (res) => {
   const marketData = await MarketData.find({})
-  return marketData
+
+  res.send(marketData)
 }
