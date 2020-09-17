@@ -3,11 +3,12 @@ pragma solidity >=0.6.0 <0.7.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Address.sol";
 import "./RealestateVerification.sol";
 
 contract RealestateToken is ERC20, Ownable {
   using SafeMath for uint;
-
+  using Address for address;
   event AddShareholder (address indexed owner, address indexed shareholder);
   event RemoveShareholder (address indexed owner, address indexed shareholder);
   event TransferRevenue (address indexed sender, address indexed receipent, uint amount);
