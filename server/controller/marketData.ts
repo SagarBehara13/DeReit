@@ -53,7 +53,7 @@ export const deleteData = async (data) => {
 
 export const getData = async (data) => {
   try{
-    const marketData = await MarketData.find({
+    const marketData = await MarketData.findOne({
       name: { $regex: data.name, $options: "i" }
     })
 
