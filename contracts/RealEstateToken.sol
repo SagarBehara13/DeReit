@@ -1,7 +1,9 @@
-pragma solidity >0.6.0 <=0.7.0;
+//SPDX-License-Identifier: MIT
+pragma solidity >=0.6.0 <0.7.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./RealestateVerification.sol";
 
 contract RealestateToken is ERC20, Ownable {
   using SafeMath for uint;
@@ -15,7 +17,9 @@ contract RealestateToken is ERC20, Ownable {
   mapping (address => uint) internal share;
   uint collected;
 
+  RealestateVerification contractInstance = new RealestateVerification();
   constructor(address _owner, uint _supply) public ERC20("RealEstateToken", "RET"){
+    require(contractInstance.isVerified(_owner), "property not verified");
     _mint(_owner, _supply);
   }
 
