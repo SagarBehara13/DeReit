@@ -11,7 +11,8 @@ export interface IMarketData {
   imageUrl: string,
   Details: string,
   zipcode: string,
-  contact: string
+  contact: string,
+  expectedRent: number
 }
 
 const MarketDataSchema = new Schema({
@@ -25,7 +26,8 @@ const MarketDataSchema = new Schema({
   imageUrl: String,
   Details: String,
   zipcode: String,
-  contact: String
+  contact: String,
+  expectedRent: Number
 })
 
 export type MarketData = Document & IMarketData

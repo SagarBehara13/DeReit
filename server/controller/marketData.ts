@@ -12,7 +12,8 @@ export const addData = async (data) => {
     imageUrl: data.imageUrl,
     Details: data.Details,
     zipcode: data.zipcode,
-    contact: data.contact
+    contact: data.contact,
+    expectedRent: data.expectedRent
   })
 
   await newRealEstate.save()
@@ -33,6 +34,7 @@ export const editData = async (data) => {
     marketData.set('Details', data.Details)
     marketData.set('zipcode', data.zipcode)
     marketData.set('contact', data.contact)
+    marketData.set('expectedRent', data.expectedRent)
 
     await marketData.save()
     return { sucess: true }
