@@ -56,7 +56,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -69,7 +70,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -2342,6 +2344,52 @@
     "version": "0.6.6+commit.6c089d02.Emscripten.clang"
   },
   "networks": {
+    "42": {
+      "events": {
+        "0xe1fe3afa0f7f761ff0a8b89086790efd5140d2907ebd5b7ff6bfcb5e075fd4c5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "id",
+              "type": "bytes32"
+            }
+          ],
+          "name": "ChainlinkCancelled",
+          "type": "event"
+        },
+        "0x7cc135e0cebb02c3480ae5d74d377283180a2601f8f644edf7987b009316c63a": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "id",
+              "type": "bytes32"
+            }
+          ],
+          "name": "ChainlinkFulfilled",
+          "type": "event"
+        },
+        "0xb5e6e01e79f91267dc17b4e6314d5d4d03593d2ceee0fbb452b750bd70ea5af9": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "id",
+              "type": "bytes32"
+            }
+          ],
+          "name": "ChainlinkRequested",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xf418C5309Af37C532B985cBd7b92e916eeCF9407",
+      "transactionHash": "0x3411b5e3530c97f74335fa6fcc08205dad96a443270345b134677491d91c2f27"
+    },
     "5777": {
       "events": {
         "0xe1fe3afa0f7f761ff0a8b89086790efd5140d2907ebd5b7ff6bfcb5e075fd4c5": {
@@ -2390,7 +2438,8 @@
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-09-20T11:48:22.763Z",
+  "updatedAt": "2020-09-21T21:09:15.319Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },
