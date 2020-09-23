@@ -3,6 +3,7 @@ const HDWalletProvider = require('truffle-hdwallet-provider');
 const kovanUrl = process.env.KOVAN_URL;
 const fs = require('fs');
 const mnemonic = fs.readFileSync(".secret").toString().trim();
+const NonceTrackerSubprovider = require("web3-provider-engine/subproviders/nonce-tracker")
 console.log(mnemonic, kovanUrl);
 
 module.exports = {
@@ -14,7 +15,11 @@ module.exports = {
     },
     kovan: {
       provider: function() {
-        return new HDWalletProvider(mnemonic, kovanUrl);
+        var wallet = new HDWalletProvider(mnemonic, kovanUrl);
+        var nonceTracker = new NonceTrackerSubprovider()
+        wallet.engine._providers.unshift(nonceTracker)
+        nonceTracker.setEngine(wallet.engine)
+        return wallet
       },
       network_id: 42
     }

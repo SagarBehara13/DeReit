@@ -29,7 +29,7 @@ contract RealestateToken is ERC20, Ownable {
   }
 
   constructor(address _owner, uint _supply) public ERC20("RealEstateToken", "RET"){
-    require(contractInstance.isVerified(_owner), "property not verified");
+    //require(contractInstance.isVerified(_owner), "property not verified");
     _mint(_owner, _supply);
   }
 
@@ -75,14 +75,14 @@ contract RealestateToken is ERC20, Ownable {
   function distributeRevenue(address _address, string memory _name) public checkShareholder(_address){
     //TODO Formulate appropriate method to distribute the shares. This is a dummy
 
-    require(share[_address] > 0 , "You don't own any shares");
-    RealEstateAPIConsumer instance = new  RealEstateAPIConsumer();
-
-    //TODO PLEASE CHECK WHETHER THIS IS THE CORRECT WAY OF RETRIEVING THE CLOSE PRICE !
-
-    instance.realestatePrice(_name);
-    uint256 closePrice = instance.closePrice();
-    uint individualProfit = share[_address].div(totalShares).mul(closePrice);
-    returnRevenue(_address, individualProfit);
+    // require(share[_address] > 0 , "You don't own any shares");
+    // RealEstateAPIConsumer instance = new  RealEstateAPIConsumer();
+    //
+    // //TODO PLEASE CHECK WHETHER THIS IS THE CORRECT WAY OF RETRIEVING THE CLOSE PRICE !
+    //
+    // instance.realestatePrice(_name);
+    // uint256 closePrice = instance.closePrice();
+    // uint individualProfit = share[_address].div(totalShares).mul(closePrice);
+    // returnRevenue(_address, individualProfit);
   }
 }

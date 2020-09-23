@@ -4,11 +4,12 @@ import "@chainlink/contracts/src/v0.6/ChainlinkClient.sol";
 
 contract RealEstateAPIConsumer is ChainlinkClient {
 
+  uint256 public price;
   uint public surfaceArea;
-  uint public closePrice;
   address private oracle;
   bytes32 private jobId;
   uint256 private fee;
+  uint public rent;
 
   constructor() public {
     setPublicChainlinkToken();
@@ -17,25 +18,42 @@ contract RealEstateAPIConsumer is ChainlinkClient {
     fee = 0.1 * 10 ** 18; // 0.1 LINK
   }
 
-  function realestaeArea(string memory _name) public {
-    Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfillArea.selector);
+  function realEstateData(string memory _name) public {
+    realestateArea(_name);
+    realestatePrice(_name);
+    realestateRent(_name);
+  }
+
+  function realestateArea(string memory _name) public {
+    Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
     request.add("name", _name);
     request.add("copyPath", "surfaceArea");
     sendChainlinkRequestTo(oracle, request, fee);
   }
 
-  function realestatePrice(string memory _name) public {
+  function fulfill(bytes32 _requestId, uint256 _surfaceArea) public recordChainlinkFulfillment(_requestId){
+    surfaceArea = _surfaceArea;
+  }
+
+  function realestatePrice(string memory _name) private {
     Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfillPrice.selector);
     request.add("name", _name);
     request.add("copyPath", "closePrice");
     sendChainlinkRequestTo(oracle, request, fee);
   }
 
-  function fulfillArea(bytes32 _requestId, uint256 _surfaceArea) public recordChainlinkFulfillment(_requestId){
-    surfaceArea = _surfaceArea;
+  function fulfillPrice(bytes32 _requestId, uint256 _price) public recordChainlinkFulfillment(_requestId){
+    price = _price;
   }
 
-  function fulfillPrice(bytes32 _requestId, uint256 _closePrice) public recordChainlinkFulfillment(_requestId) {
-    closePrice =  _closePrice;
+  function realestateRent(string memory _name) private {
+    Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfillRent.selector);
+    request.add("name", _name);
+    request.add("copyPath", "expectedRent");
+    sendChainlinkRequestTo(oracle, request, fee);
+  }
+
+  function fulfillRent(bytes32 _requestId, uint256 _rent) public recordChainlinkFulfillment(_requestId){
+    rent = _rent;
   }
 }
