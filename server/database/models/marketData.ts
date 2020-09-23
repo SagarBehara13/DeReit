@@ -2,32 +2,50 @@ import { Document, Schema, model } from 'mongoose'
 
 export interface IMarketData {
   name: string,
-  location: string,
-  owner: string,
-  type: string,
-  country: string,
+  owner: {
+    name: string,
+    contact: string
+  },
+  images: [],
+  details: string,
+  address: {
+    street: string,
+    city: string,
+    country: string,
+    zipcode: string
+  },
+  location:{
+    lat: number,
+    lng: number
+  },
   surfaceArea: number,
   closePrice: number,
-  imageUrl: string,
-  Details: string,
-  zipcode: string,
-  contact: string,
-  expectedRent: number
+  expectedRent: number,
+  type: string
 }
 
 const MarketDataSchema = new Schema({
   name: String,
-  location: String,
-  owner: String,
-  type: String,
-  country: String,
+  owner: {
+    name: String,
+    contact: String
+  },
+  images: [],
+  details: String,
+  address: {
+    street: String,
+    city: String,
+    country: String,
+    zipcode: String
+  },
+  location:{
+    lat: Number,
+    lng: Number
+  },
   surfaceArea: Number,
   closePrice: Number,
-  imageUrl: String,
-  Details: String,
-  zipcode: String,
-  contact: String,
-  expectedRent: Number
+  expectedRent: Number,
+  type: String
 })
 
 export type MarketData = Document & IMarketData
