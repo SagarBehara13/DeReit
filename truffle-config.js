@@ -1,10 +1,9 @@
 require('dotenv').config()
-const HDWalletProvider = require('truffle-hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 const kovanUrl = process.env.KOVAN_URL;
 const fs = require('fs');
 const mnemonic = fs.readFileSync(".secret").toString().trim();
 const NonceTrackerSubprovider = require("web3-provider-engine/subproviders/nonce-tracker")
-console.log(mnemonic, kovanUrl);
 
 module.exports = {
   networks: {

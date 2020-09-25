@@ -20,8 +20,8 @@
   },
   "homepage": "https://github.com/SagarBehara13/chainlink-hackathon#readme",
   "dependencies": {
-    "@chainlink/contracts": "^0.0.10",
-    "@openzeppelin/contracts": "^3.1.0",
+    "@chainlink/contracts": "0.0.10",
+    "@openzeppelin/contracts": "^3.2.0",
     "@truffle/hdwallet-provider": "^1.1.0",
     "@types/express": "^4.17.8",
     "@types/node": "^14.10.2",
