@@ -12190,8 +12190,8 @@
     "version": "0.6.6+commit.6c089d02.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.2.3",
-  "updatedAt": "2020-09-22T20:27:15.711Z",
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-09-23T14:26:54.919Z",
   "devdoc": {
     "methods": {},
     "title": "The ChainlinkClient contract"
