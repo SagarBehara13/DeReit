@@ -21,9 +21,8 @@ export const open = (url?: string) => {
       useFindAndModify: false
     }
 
-    //process.env.DATABASE_URI || 
-    mongoose.connect("mongodb+srv://root:root@cluster0.jmtlv.mongodb.net/RealEstate", options, (error: any) => {
-    //mongoose.connect('mongodb://127.0.0.1:55016/wallet', options, (error: any) => {
+    //process.env.DATABASE_URI ||
+    mongoose.connect(process.env.DATABASE_URI, options, (error: any) => {
       if (error) {
 
         logger('please make sure mongodb is installed and running!')
