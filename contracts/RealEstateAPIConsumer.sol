@@ -13,7 +13,9 @@ contract RealEstateAPIConsumer is ChainlinkClient {
     bytes32 public latestRequestId;
     bytes32 public tokenHash;
 
-    mapping(bytes32 => bytes32) internal receipts;
+    mapping(bytes32 => bytes32) internal receiptPrice;
+    mapping(bytes32 => bytes32) internal receiptArea;
+    mapping(bytes32 => bytes32) internal receiptRent;
     mapping(bytes32 => uint256) private currentRealEstatePrice;
     mapping(bytes32 => uint256) private currentRealEstateRent;
     mapping(bytes32 => uint256) private currentRealEstateArea;
@@ -25,22 +27,22 @@ contract RealEstateAPIConsumer is ChainlinkClient {
         fee = 0.1 * 10 ** 18; // 0.1 LINK
     }
 
-    function realEstateData(string memory _name) public {
+    /*function realEstateData(string memory _name) public {
         realestateArea(_name);
-        //realestatePrice(_name);
+        returnClosePrice(_name);
         realestateRent(_name);
-    }
+    }*/
 
     function returnClosePrice(string memory _name) public {
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.myCallback.selector);
         request.add("name", _name);
         request.add("copyPath", "closePrice");
-        receipts[sendChainlinkRequestTo(oracle, request, fee)] = stringToBytes32(_name);
+        receiptPrice[sendChainlinkRequestTo(oracle, request, fee)] = stringToBytes32(_name);
     }
 
     function myCallback(bytes32 _requestId, uint256 _price) public recordChainlinkFulfillment(_requestId){
-        tokenHash = receipts[_requestId];
-        delete receipts[_requestId];
+        tokenHash = receiptPrice[_requestId];
+        delete receiptPrice[_requestId];
         currentRealEstatePrice[tokenHash] = _price;
         latestRequestId = _requestId;
         price = _price;
@@ -50,26 +52,37 @@ contract RealEstateAPIConsumer is ChainlinkClient {
         return currentRealEstatePrice[stringToBytes32(_name)];
     }
 
-    function realestateArea(string memory _name) private {
+    function realestateArea(string memory _name) public {
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
         request.add("name", _name);
         request.add("copyPath", "surfaceArea");
-        sendChainlinkRequestTo(oracle, request, fee);
+        receiptArea[sendChainlinkRequestTo(oracle, request, fee)] = stringToBytes32(_name);
     }
 
     function fulfill(bytes32 _requestId, uint256 _surfaceArea) public recordChainlinkFulfillment(_requestId){
+        tokenHash = receiptArea[_requestId];
+        delete receiptArea[_requestId];
+        currentRealEstateArea[tokenHash] = _surfaceArea;
+        latestRequestId = _requestId;
         surfaceArea = _surfaceArea;
     }
 
-    function realestateRent(string memory _name) private {
+
+
+    function realestateRent(string memory _name) public {
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfillRent.selector);
         request.add("name", _name);
         request.add("copyPath", "expectedRent");
-        sendChainlinkRequestTo(oracle, request, fee);
+        receiptRent[sendChainlinkRequestTo(oracle, request, fee)] = stringToBytes32(_name);
     }
 
     function fulfillRent(bytes32 _requestId, uint256 _rent) public recordChainlinkFulfillment(_requestId){
+        tokenHash = receiptRent[_requestId];
+        delete receiptRent[_requestId];
+        currentRealEstateRent[tokenHash] = _rent;
+        latestRequestId = _requestId;
         rent = _rent;
+
     }
 
     function stringToBytes32(string memory source) internal pure returns (bytes32 result) {

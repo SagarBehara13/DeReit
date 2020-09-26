@@ -22,15 +22,19 @@ contract RealestateToken is ERC20, Ownable {
   uint public totalShares;
 
   RealestateVerification contractInstance = new RealestateVerification();
+  RealEstateAPIConsumer consumer ;
 
   modifier checkShareholder(address _address) {
     require(isShareHolder(_address), "Not a shareholder");
    _;
   }
 
-  constructor(address _owner, uint _supply) public ERC20("RealEstateToken", "RET"){
+  constructor(address _owner, address consumerAPIAdress, string memory _name) public ERC20("RealEstateToken", "RET"){
     //require(contractInstance.isVerified(_owner), "property not verified");
-    _mint(_owner, _supply);
+    consumer = RealEstateAPIConsumer(consumerAPIAdress);
+    consumer.realestateArea(_name);
+    uint supply = consumer.surfaceArea();
+    _mint(_owner, supply);
   }
 
   function accumulate() external payable {
@@ -72,7 +76,7 @@ contract RealestateToken is ERC20, Ownable {
   }
 
 
-  function distributeRevenue(address _address, string memory _name) public checkShareholder(_address){
+ /* function distributeRevenue(address _address, string memory _name) public checkShareholder(_address){
     //TODO Formulate appropriate method to distribute the shares. This is a dummy
 
     // require(share[_address] > 0 , "You don't own any shares");
@@ -84,5 +88,5 @@ contract RealestateToken is ERC20, Ownable {
     // uint256 closePrice = instance.closePrice();
     // uint individualProfit = share[_address].div(totalShares).mul(closePrice);
     // returnRevenue(_address, individualProfit);
-  }
+  }*/
 }
