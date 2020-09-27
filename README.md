@@ -31,4 +31,23 @@ DeReit is a decentralized platform for buying real estate properties via the Eth
 * Head to the RealEstateConsumerApi and deploy it into the remix.
 
 * Call the realEstateData function, The function expects real estate property name, example [ 'Mannat', 'Taj' ] choose any one.
+
 ```
+<img src="https://github.com/SagarBehara13/DeReit/blob/master/images/apiFunctionCall.png">
+
+```
+* Once the transaction is sucessfull.
+* The smart access the data which is of-chain.
+```
+<img src="https://github.com/SagarBehara13/DeReit/blob/master/images/RealEstateData.png">
+
+```
+* Head over to RealEstateToken.sol, This is where the tokenization happens
+
+* The deployment expects 2 args, pass the contract address of the RealEstateConsumer.sol and the name of the real Estate to be tokenized
+
+* Deploy the contract, you can see the real estate  property has been tokenized.
+
+* The property is tokenized on the basises of its surface area
+```
+<img src="https://github.com/SagarBehara13/DeReit/blob/master/images/totalSupply.png">
