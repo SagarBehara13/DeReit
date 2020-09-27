@@ -26,9 +26,9 @@ DeReit is a decentralized platform for buying real estate properties via the Eth
 
 * Add the scripts into the remix editor.
 
-* The data is being grabbed from the server and an externa adapter feeds the data into the contract.
+* The data is being grabbed from the server and an externa adapter feeds the data into the smart contract.
 
-* Head to the RealEstateConsumerApi and deploy it into the remix.
+* Head to the RealEstateConsumerApi.sol script and deploy it into the remix editor.
 
 * Call the realEstateData function, The function expects real estate property name, example [ 'Mannat', 'Taj' ] choose any one.
 
@@ -47,15 +47,15 @@ DeReit is a decentralized platform for buying real estate properties via the Eth
 
 * The deployment expects 2 args, pass the contract address of the RealEstateConsumerApi.sol and the name of the real estate to be tokenized.
 
-* Deploy the contract, you can see the real estate  property has been tokenized.
+* Deploy the contract, you can see the real estate property has been tokenized.
 
-* The property is tokenized on the basises of its surface area.
+* The property is tokenized on the basises of the surface area of the real estate.
 ```
 
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/DeployContract.png">
 
 ```
-* Once the token is deployed it mints token according to the surface area of the property.
+* Once the contract is deployed it mints token according to the surface area of the property.
 ```
 
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/TotalShares.png">
@@ -67,7 +67,7 @@ DeReit is a decentralized platform for buying real estate properties via the Eth
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/Approve%20Token.png">
 
 ```
-* Once the token are approved. You can but tokens.
+* Once the tokens are approved. Tokens are ready for sale.
 ```
 
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/ByToken.png">
@@ -79,13 +79,13 @@ DeReit is a decentralized platform for buying real estate properties via the Eth
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/isShareHolder.png">
 
 ```
-* You can view the reaming shares which can be bought.
+* You can view the remaining shares which can be bought.
 ```
 
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/remainingShares.png">
 
 ```
-* Calculate the profit earned by the benificary address
+* Calculate the profit earned by the benificary address.
 ```
 
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/Calculate%20Profit%20by%20Month.png"><br></br>
@@ -96,4 +96,4 @@ DeReit is a decentralized platform for buying real estate properties via the Eth
 
 ## Future Scope
 * Complete deployment and migration in truffle.
-* Automatic Distribution of rent with the help of chainlink-alarm
+* Automatic Distribution of rent with the help of Chainlink alarm clock.
