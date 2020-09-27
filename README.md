@@ -54,35 +54,45 @@ DeReit is a decentralized platform for buying real estate properties via the Eth
 
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/DeployContract.png">
 
+```
+* Once the token is deployed it mints token according to the surface area of the property.
+```
+
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/TotalShares.png">
 
 ```
 * Approve the tokens for sale.
 ```
+
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/Approve%20Token.png">
 
 ```
 * Once the token are approved. You can but tokens.
 ```
+
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/ByToken.png">
 
 ```
 * The person(benificary address) who buys the token becomes the shareholder of the tokenized property.
 ```
+
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/isShareHolder.png">
 
 ```
 * You can view the reaming shares which can be bought.
 ```
+
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/remainingShares.png">
+
 ```
 * Calculate the profit earned by the benificary address
 ```
+
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/Calculate%20Profit%20by%20Month.png"><br></br>
 <img src="https://github.com/SagarBehara13/DeReit/blob/master/images/ProfitbyMonth.png">
 
 * Overall Values
-<img src="https://github.com/SagarBehara13/DeReit/blob/master/images/Frontend.png">
+<img src="https://github.com/SagarBehara13/DeReit/blob/master/images/OverallData.png">
 
 ## Future Scope
 * Complete deployment and migration in truffle.
