@@ -18,4 +18,17 @@ DeReit is a decentralized platform for buying real estate properties via the Eth
 * DeReit has a user interface to mint,buy,view tokenized property.
 * https://github.com/adamazad/dereit-web The frontend for DeReit.
 <h2 align="center"> Example Interface </h2>
-<img src="https://github.com/SagarBehara13/chainlink-hackathon/blob/master/images/Frontend.png">
+<img src="https://github.com/SagarBehara13/chainlink-hackathon/blob/master/images/Frontend.png"><br></br>
+
+## Steps to test
+```
+* Open the remmix folder, copy the scripts into the remix editor https://remix.ethereum.org/
+
+* Add the scripts into the remix editor.
+
+* The data is being grabbed from the server and an externa adapter feeds the data into the contract.
+
+* Head to the RealEstateConsumerApi and deploy it into the remix.
+
+* Call the realEstateData function, The function expects real estate property name, example [ 'Mannat', 'Taj' ] choose any one.
+```
