@@ -7,10 +7,11 @@ pragma solidity >=0.6.0 <0.7.0;
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol";
+import "https://github.com/smartcontractkit/chainlink/evm-contracts/src/v0.6/ChainlinkClient.sol";
 import "./RealestateVerification.sol";
 import "./RealEstateAPIConsumer.sol";
 
-contract RealestateToken is ERC20, Ownable {
+contract RealestateToken is ERC20, Ownable, ChainlinkClient {
   using SafeMath for uint;
   using Address  for address;
 
@@ -22,13 +23,13 @@ contract RealestateToken is ERC20, Ownable {
   mapping(address => bool) internal shareholders;
   mapping (address => uint) internal share;
   uint public totalShares;
-  uint public collected;
+  //uint public _collected;
   uint public propertyArea;
   uint public propertyPrice;
   uint public propertyRent;
   uint public tokenPrice;
   uint public profitByMonth;
-  //string text;
+  string public propertyName;
 
   RealestateVerification contractInstance = new RealestateVerification();
   RealEstateAPIConsumer consumer;
@@ -38,14 +39,15 @@ contract RealestateToken is ERC20, Ownable {
    _;
   }
 
-  constructor(string memory _name) public ERC20("RealEstateToken", "RET"){
+  constructor(string memory _name, address consumerAPIAddress) public ERC20("RealEstateToken", "RET"){
+    setPublicChainlinkToken();
     //require(contractInstance.isVerified(_owner), "property not verified");
-    consumer = new RealEstateAPIConsumer();
-    consumer.realEstateData(_name);
-    //text = consumer.test();
-    propertyArea = consumer.getCurrentAreaeByAddress(_name);
-    //propertyRent = consumer.getCurrentRentByAddress(_name);
-    //setTokenPrice(_name);
+    consumer = RealEstateAPIConsumer(consumerAPIAddress);
+    consumer.realestateArea(_name);
+    propertyArea = consumer.surfaceArea();
+    propertyPrice = consumer.price();
+    propertyRent = consumer.rent();
+    propertyName = _name;
     _mint(msg.sender, propertyArea);
   }
 
@@ -67,7 +69,7 @@ contract RealestateToken is ERC20, Ownable {
     //TODO find a formula to convert amount to shares
     //This is a dummy
 
-    collected = collected.add(msg.value);
+    //_collected = _collected.add(msg.value);
     //totalShares = collected ;
     share[_msgSender()] = msg.value;
   }

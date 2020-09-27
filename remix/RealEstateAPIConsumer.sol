@@ -34,7 +34,7 @@ contract RealEstateAPIConsumer is ChainlinkClient {
         realestateRent(_name);
     }
 
-    function returnClosePrice(string memory _name) private {
+    function returnClosePrice(string memory _name) public {
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.myCallback.selector);
         request.add("name", _name);
         request.add("copyPath", "closePrice");
@@ -57,7 +57,7 @@ contract RealEstateAPIConsumer is ChainlinkClient {
         return currentRealEstatePrice[stringToBytes32(_name)];
     }
 
-    function realestateArea(string memory _name) private {
+    function realestateArea(string memory _name) public {
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
         request.add("name", _name);
         request.add("copyPath", "surfaceArea");
@@ -76,7 +76,7 @@ contract RealEstateAPIConsumer is ChainlinkClient {
         return currentRealEstateArea[stringToBytes32(_name)];
     }
 
-    function realestateRent(string memory _name) private {
+    function realestateRent(string memory _name) public {
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfillRent.selector);
         request.add("name", _name);
         request.add("copyPath", "expectedRent");
