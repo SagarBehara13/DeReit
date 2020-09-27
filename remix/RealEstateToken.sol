@@ -41,12 +41,12 @@ contract RealestateToken is ERC20, Ownable {
   constructor(string memory _name) public ERC20("RealEstateToken", "RET"){
     //require(contractInstance.isVerified(_owner), "property not verified");
     consumer = new RealEstateAPIConsumer();
-    //consumer.realEstateData(_name);
+    consumer.realEstateData(_name);
     //text = consumer.test();
-    //propertyArea = consumer.getCurrentAreaeByAddress(_name);
+    propertyArea = consumer.getCurrentAreaeByAddress(_name);
     //propertyRent = consumer.getCurrentRentByAddress(_name);
     //setTokenPrice(_name);
-    _mint(msg.sender, 1000);
+    _mint(msg.sender, propertyArea);
   }
 
   function setTokenPrice(string memory _name) private returns(uint){
