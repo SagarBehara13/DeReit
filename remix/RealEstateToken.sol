@@ -11,7 +11,7 @@ import "https://github.com/smartcontractkit/chainlink/evm-contracts/src/v0.6/Cha
 import "./RealestateVerification.sol";
 import "./RealEstateAPIConsumer.sol";
 
-contract RealestateToken is ERC20, Ownable, ChainlinkClient {
+contract RealEstateToken is ERC20, Ownable, ChainlinkClient {
   using SafeMath for uint;
   using Address  for address;
 
@@ -21,7 +21,8 @@ contract RealestateToken is ERC20, Ownable, ChainlinkClient {
 
 
   mapping(address => bool) internal shareholders;
-  mapping (address => uint) internal share;
+  mapping(address => uint) internal share;
+
   uint public totalShares;
   //uint public _collected;
   uint public propertyArea;
@@ -31,6 +32,7 @@ contract RealestateToken is ERC20, Ownable, ChainlinkClient {
   uint public profitByMonth;
   string public propertyName;
 
+
   RealestateVerification contractInstance = new RealestateVerification();
   RealEstateAPIConsumer consumer;
 
@@ -39,7 +41,7 @@ contract RealestateToken is ERC20, Ownable, ChainlinkClient {
    _;
   }
 
-  constructor(string memory _name, address consumerAPIAddress) public ERC20("RealEstateToken", "RET"){
+  constructor(address consumerAPIAddress, string memory _name) public ERC20("RealEstateToken", "RET"){
     setPublicChainlinkToken();
     //require(contractInstance.isVerified(_owner), "property not verified");
     consumer = RealEstateAPIConsumer(consumerAPIAddress);
@@ -48,13 +50,21 @@ contract RealestateToken is ERC20, Ownable, ChainlinkClient {
     propertyPrice = consumer.price();
     propertyRent = consumer.rent();
     propertyName = _name;
+    tokenPrice = propertyArea / propertyPrice;
+    totalShares = propertyArea;
     _mint(msg.sender, propertyArea);
   }
 
-  function setTokenPrice(string memory _name) private returns(uint){
-    propertyPrice = consumer.getCurrentAreaeByAddress(_name);
-    tokenPrice = propertyArea / propertyPrice;
-    return tokenPrice;
+
+  function buyToken(address from, address _shareHolder, uint amount) public returns(address){
+      //require(value >= amount * tokenPrice);
+      require(amount <= balanceOf(from));
+
+      transferFrom(from, _shareHolder, amount);
+      addShareHolder(_shareHolder);
+      share[_shareHolder] = amount;
+      totalShares -= amount;
+      return _shareHolder;
   }
 
 //   function calculateProfitByMonth(uint _share, uint _propertyRent, uint _propertyArea) public returns(uint){
@@ -117,4 +127,5 @@ contract RealestateToken is ERC20, Ownable, ChainlinkClient {
     // uint individualProfit = share[_address].div(totalShares).mul(closePrice);
     // returnRevenue(_address, individualProfit);
   }*/
+
 }
