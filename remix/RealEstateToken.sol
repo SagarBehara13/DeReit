@@ -31,6 +31,7 @@ contract RealEstateToken is ERC20, Ownable, ChainlinkClient {
   uint public tokenPrice;
   uint public profitByMonth;
   string public propertyName;
+  uint public _profitByMonth;
 
 
   RealestateVerification contractInstance = new RealestateVerification();
@@ -67,13 +68,14 @@ contract RealEstateToken is ERC20, Ownable, ChainlinkClient {
       return _shareHolder;
   }
 
-//   function calculateProfitByMonth(uint _share, uint _propertyRent, uint _propertyArea) public returns(uint){
-//     propertyRent = _propertyRent;
-//     propertyArea = _propertyArea;
-//     share =
-//     profitByMonth = (share * propertyRent) / propertyArea;
-//     return profitByMonth;
-//   }
+  function calculateProfitByMonth(address _benificary) public returns(uint){
+    uint _share = share[_benificary];
+    profitByMonth = (_share * propertyRent) / propertyArea;
+    _profitByMonth = profitByMonth;
+    return profitByMonth;
+  }
+
+
 
   function accumulate() external payable {
     //TODO find a formula to convert amount to shares
